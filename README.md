@@ -36,14 +36,16 @@ Finally, it should be noted that <b>“Malware Protection”</b> is one out of a
 
 To launch the EC instance with the EBS volume attached to it we will:-
 
-1.	Search for EC2 service in the services search bar. 
-2.	Click on EC2 which is the first option on the list. <img width="956" alt="1 - EC2 Launch" src="https://github.com/user-attachments/assets/6b0873a5-918b-420a-9682-bfd07266d875" />
+1.	Search for <b>"EC2"</b> service in the <b>Services search bar</b>. 
+2.	Click on <b>EC2</b> which is the first option on the list. <img width="956" alt="1 - EC2 Launch" src="https://github.com/user-attachments/assets/6b0873a5-918b-420a-9682-bfd07266d875" />
 
-3.	Click on “Instances” on the left pane of the EC2 service page.
-4.	Click on either of the two “Launch Instance” buttons as circled on the screenshot below.
-5.	Type in the name of your EC2 Instance in the “Name and Tag” textbox.
-6.	Select the OS Image type you wish to use; “Amazon Linux” in our case.
-7.	Expand the listbox and choose any of the free tier Amazon Machine Image; Amazon Linux 2023 AMI in our case
+3.	Click on <b>“Instances”</b> on the left pane of the EC2 service page.
+4.	Click on either of the two <b>“Launch Instance”</b> buttons as circled on the screenshot below.<img width="962" alt="2 - EC2 Launch" src="https://github.com/user-attachments/assets/470e079b-5d11-40b9-8fbe-67753c5c5ba0" />
+
+5.	Type in the name of you want for your EC2 Instance in the <b>“Name and Tag”</b> textbox.
+6.	Select the <b>OS Image type</b> you wish to use; <b>“Amazon Linux”</b> in our case.
+7.	Expand the listbox and choose any of the free tier Amazon Machine Image; <b>Amazon Linux 2023 AMI</b> in our case.<img width="959" alt="3 - EC2 Launch OS Spec" src="https://github.com/user-attachments/assets/e5a6e7bf-2866-480a-8c7e-addda2421f77" />
+
 8.	Leave Architecture as it is 64-bit (x86) and Instance Type as t2.micro
 9.	At this point we choose the key pair that will be used to access the EC2 and “Allow SSH from traffic from Anywhere 0.0.0.0/0”. Now there are 2 very important things to note here.
 a.	I already have a key pair created, so I just chose it. However, you can choose to proceed without key pair or click on “create new key pair” to create yours.
