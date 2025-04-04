@@ -12,21 +12,24 @@ In this project we will:-
 
 <h2>Overview Of Amazon Guardduty</h2>
 
-<b>“Amazon GuardDuty is a threat detection service that continuously monitors your AWS accounts and workloads for malicious activity and delivers detailed security findings for visibility and remediation.”</b>
-- AWS Documentation
+<b>“Amazon GuardDuty is a threat detection service that continuously monitors your AWS accounts and workloads for malicious activity and delivers detailed security findings for visibility and remediation.”</b> - AWS Documentation
 
 GuardDuty uses Machine Learning algorithms to perform anomaly detection using 3rd party data. As we will see, you just need a few clicks to enable it and run a 30 days free trial. This means that you do not need to install any 3rd party software like TrendMicro’s Deep Security. You also do not need to do any configurations as GuardDuty comes fully configured by AWS to look for the malicious activities, although you can specify certain IP’s you wish to include/exempt from your scanning.
 
 <h3>Input Data</h3>
 
 You are probably wondering where does the data comes from? Well GuardDuty cab be set to receive log data from:-
-•	<b>CloudTrail Events Logs</b> – such as unusual API calls, unauthorized deployment of services, etc.
- -	CloudTrail Management Events – such as VPC subnet creation, trail creation, etc.
- -	CloudTrail S3 Data Events – get object, list objects, delete object, put object, etc.
-•	<b>VPC Flow Logs</b> – unusual internal traffic, unusual IP addresses, etc
-•	DNS Logs – compromised EC2 instances sending encoded data within DNS queries
-GuardDuty can also analyze EKS Audit Logs, RDS & Aurora, EBS, Lambda, S3 Data Events, etc to identify malicious activities. It can also be used to setup EventBridge rules to be notified in case of interesting findings. GuardDuty can help protect against Cryptocurrency attacks as it will generate a dedicated finding for such occasions when your resource is interacting with a IP or Domain Name that is know for Crypto mining activities.
-Finally, it should be noted that “Malware Protection” is one out of a five GuardDuty features known as Protection Plans. The other four are S3 Protection, EKS Protection, RDS Protection and Lambda Protection.
+- <b>CloudTrail Events Logs</b> – such as unusual API calls, unauthorized deployment of services, etc.
+
+  CloudTrail Management Events – such as VPC subnet creation, trail creation, etc.
+  CloudTrail S3 Data Events – get object, list objects, delete object, put object, etc.
+
+- <b>VPC Flow Logs</b> – unusual internal traffic, unusual IP addresses, etc
+- DNS Logs – compromised EC2 instances sending encoded data within DNS queries.
+- GuardDuty can also analyze EKS Audit Logs, RDS & Aurora, EBS, Lambda, S3 Data Events, etc to identify malicious activities. It can also be used to setup EventBridge rules to be notified in case of interesting findings.
+- GuardDuty can help protect against Cryptocurrency attacks as it will generate a dedicated finding for such occasions when your resource is interacting with a IP or Domain Name that is know for Crypto mining activities.
+
+Finally, it should be noted that <b>“Malware Protection”</b> is one out of a five GuardDuty features known as Protection Plans. The other four are S3 Protection, EKS Protection, RDS Protection and Lambda Protection.
 EC2 Instance Launch
 To launch the EC instance with the EBS volume attached to it we will
 1.	Search for EC2 service in the services search bar. 
