@@ -37,22 +37,24 @@ Finally, it should be noted that <b>“Malware Protection”</b> is one out of a
 To launch the EC instance with the EBS volume attached to it we will:-
 
 1.	Search for <b>"EC2"</b> service in the <b>Services search bar</b>. 
-2.	Click on <b>EC2</b> which is the first option on the list. <img width="956" alt="1 - EC2 Launch" src="https://github.com/user-attachments/assets/6b0873a5-918b-420a-9682-bfd07266d875" />
+2.	Click on <b>EC2</b> which is the first option on the list.  <img width="956" alt="1 - EC2 Launch" src="https://github.com/user-attachments/assets/6b0873a5-918b-420a-9682-bfd07266d875" />
 
 3.	Click on <b>“Instances”</b> on the left pane of the EC2 service page.
-4.	Click on either of the two <b>“Launch Instance”</b> buttons as circled on the screenshot below.<img width="962" alt="2 - EC2 Launch" src="https://github.com/user-attachments/assets/470e079b-5d11-40b9-8fbe-67753c5c5ba0" />
+4.	Click on either of the two <b>“Launch Instance”</b> buttons as circled on the screenshot below.  <img width="962" alt="2 - EC2 Launch" src="https://github.com/user-attachments/assets/470e079b-5d11-40b9-8fbe-67753c5c5ba0" />
 
 5.	Type in the name of you want for your EC2 Instance in the <b>“Name and Tag”</b> textbox.
 6.	Select the <b>OS Image type</b> you wish to use; <b>“Amazon Linux”</b> in our case.
-7.	Expand the listbox and choose any of the free tier Amazon Machine Image; <b>Amazon Linux 2023 AMI</b> in our case.<img width="959" alt="3 - EC2 Launch OS Spec" src="https://github.com/user-attachments/assets/e5a6e7bf-2866-480a-8c7e-addda2421f77" />
+7.	Expand the listbox and choose any of the free tier Amazon Machine Image; <b>Amazon Linux 2023 AMI</b> in our case.  <img width="959" alt="3 - EC2 Launch OS Spec" src="https://github.com/user-attachments/assets/e5a6e7bf-2866-480a-8c7e-addda2421f77" />
 
 8.	Leave Architecture as it is 64-bit (x86) and Instance Type as t2.micro
-9.	At this point we choose the key pair that will be used to access the EC2 and “Allow SSH from traffic from Anywhere 0.0.0.0/0”. Now there are 2 very important things to note here.
-a.	I already have a key pair created, so I just chose it. However, you can choose to proceed without key pair or click on “create new key pair” to create yours.
-# I will later make an illustration on “how to create new key pair” and will hopefully attach it here. #
-b.	It is against AWS security Best Practice to:
-i.	Launch an EC2 instance without an encryption key pair
-ii.	Allow SSH traffic from anywhere. Doing so will allow anyone to have an unrestricted access to your EC2 instance.
+9.	At this point we choose the key pair that will be used to access the EC2 and “Allow SSH from traffic from Anywhere 0.0.0.0/0”.Now there are 2 very important things to note here.
+
+>[!IMPORTANT]
+>I already have a key pair created, so I just chose it. However, you can choose to proceed without key pair or click on “create new key pair” to create yours.
+<b>#I will later make an illustration on “how to create new key pair” and will hopefully attach it here.#</b>
+
+>[!WARNING]
+>It is against AWS security Best Practice to launch an EC2 instance without an encryption key pair. Allow SSH traffic from anywhere. Doing so will allow anyone to have an unrestricted access to your EC2 instance.
 10.	Then for the Storage leave everything as default, for we do not require huge storage for this practical and then click on Launch Instance.
 11.	Allow the progress to complete, and in case any of the steps failed you can restart failed steps.
 12.	After completion, click on the Instance ID i-01497d303bad2c421 in my case from the Success page displayed. Also notice the Launch log showing that a Security Group (AWS equivalent of endpoint Firewall) has been configured for you based on the allow SSH from 0.0.0.0/0 in stage 9.
