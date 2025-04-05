@@ -16,7 +16,7 @@ In this project we will:-
 4.	Then we will enable GuarDuty and launch an “On-demand Malware scanning” on our EC2 Instance, and
 5.	Finally analyze a sample finding.
 
-<h2>Overview Of Amazon Guardduty</h2>
+<h2>Overview Of Amazon GuardDuty</h2>
 
 <b>“Amazon GuardDuty is a threat detection service that continuously monitors your AWS accounts and workloads for malicious activity and delivers detailed security findings for visibility and remediation.”</b> - AWS Documentation
 
@@ -64,9 +64,13 @@ To launch the EC instance with the EBS volume attached to it we will:-
 
 10.	Then for the <b>Storage</b> leave everything as default, for we do not require huge storage for this practical and then click on Launch Instance.
 11.	Allow the process to complete, and in case any of the steps failed you can <b><i>restart failed</i></b> steps.
-12.	After completion, click on the <b>Instance ID i-01497d303bad2c421</b> in my case from the Success page displayed. Also notice the Launch log showing that a Security Group (AWS equivalent of endpoint Firewall) has been configured for you based on the allow SSH from 0.0.0.0/0 in stage 9.
-13.	Voila! Your EC2 Instance has been launched. Take note of the circled areas showing our configurations
-Connecting to EC2 to Download
+12.	After completion, click on the <b>Instance ID i-01497d303bad2c421</b> in my case from the Success page displayed in order to start the instance. Also notice the <b>Launch log</b> showing that a <b>Security Group (AWS equivalent of endpoint Firewall)</b> has been configured for you based on the <b><i>allow SSH from 0.0.0.0/0</i></b> in <b>stage 9</b>. Also take note of the circled area showing your EC2 configurations.
+13.	<b>Voila!</b> Your EC2 Instance has been launched.
+
+
+<h2>Connecting to EC2 to Download</h2>
+
 At this stage we will connect to the EC2 and download a sample malware from the internet. This will be the test material that GuardDuty will analyze and discover the malicious artifacts after we launched our scan. Below are the steps to follow:-
-1.	Click on Connect from the upper right corner of the Instance page.
+
+1.	Click on <b>Connect</b> from the upper right corner of the Instance page.
 2.	
