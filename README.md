@@ -27,9 +27,9 @@ GuardDuty uses Machine Learning algorithms to perform anomaly detection using 3r
 You are probably wondering where does the data comes from? Well GuardDuty cab be set to receive log data from:-
 - <b>CloudTrail Events Logs</b> – such as unusual API calls, unauthorized deployment of services, etc.
 
-  CloudTrail Management Events – such as VPC subnet creation, trail creation, etc.
+  <b><i>CloudTrail Management Events</i></b> – such as VPC subnet creation, trail creation, etc.
   
-  CloudTrail S3 Data Events – get object, list objects, delete object, put object, etc.
+  <i><b>CloudTrail S3 Data Events</i></b> – get object, list objects, delete object, put object, etc.
 
 - <b>VPC Flow Logs</b> – unusual internal traffic, unusual IP addresses, etc
 - DNS Logs – compromised EC2 instances sending encoded data within DNS queries.
@@ -73,4 +73,19 @@ To launch the EC instance with the EBS volume attached to it we will:-
 At this stage we will connect to the EC2 and download a sample malware from the internet. This will be the test material that GuardDuty will analyze and discover the malicious artifacts after we launched our scan. Below are the steps to follow:-
 
 1.	Click on <b>Connect</b> from the upper right corner of the Instance page.
-2.	
+2.	Connect using <b>EC2 Instance Connect</b> by clicking on <b>Connect</b> at the lower right corner and a <b>Command Line Interface</b> will be displayed.
+3.	Go to <b>https://www.eicar.org/download-anti-malware-testfile/</b> on your browser and copy the <b>EICAR.COM-ZIP</b> link address as seen from the below screenshot.
+4.	Back to the EC2 Connect CLI and use the command <b>“wget”</b> and paste the copied link <b>(https://www.eicar.org/download/eicar_com-zip/)</b>, then hit <b>Enter</b>. This will download the Malware Test file on to your Instance.
+5.	To verify the download success, you can do a linux <b><i>“ls command”</i></b> and you should see the <b>index.html<b> file.
+
+<h2>Enable Amazon GuardDuty Service</h2>
+
+At this stage we have already launched our EC2 instance and have also downloaded the malware sample on to the machine. Now what is left is to enable GuardDuty and start our scanning. For that we will follow the outlined steps:-
+
+1.	Open a new <b>AWS Management Console</b> window, search for and open <b>GuardDuty</b> just as we did to launch EC2 at the beginning and click on <b>Get Started</b>.
+2.	Then scroll down and click on <b>Enable GuardDuty</b>.
+3.	From the left pane of GuardDuty service page click on <b>EC2 Malware Scanning</b>. Notice the <b>Summary dashboard</b> with the interesting things circled.
+4.	Click on either of the two <b>Start a new on-demand scan</b> buttons.
+5.	From the next page, copy the sample <b>arn</b> and replace the <b>account ID & instance ID</b> with your specific account & instance IDs and click on <b>Connect</b> at the lower right corner of the page.
+6.	Allow the scanning to run for a couple minutes and refresh the page. The <b>Scan result</b> will show <b>Infected</b>.
+
