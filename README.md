@@ -1,7 +1,7 @@
 # Threat_Detection_with_Amazon_GuardDuty
 
 <h2>Project Scope</h2>
-This projects assumes that the reader is not an absolute beginner. That is the reader is already familiar with AWS terminologies and has access to <b>AWS Management Console</b>.
+This projects assumes that the reader is not an absolute beginner. That is to say the reader is already familiar with AWS terminologies and has access to <b>AWS Management Console</b>.
 
 
 > [!NOTE]
@@ -10,33 +10,33 @@ This projects assumes that the reader is not an absolute beginner. That is the r
 In this project we will:-
 
 
-1.	Start with an overview of GuardDuty and its features,
-2.	Dive into the practical section and lunch an EC2 Instance with an EBS volume attached to it,
-3.	Then connect to the EC2 instance via EC2 connect to download our sample infected file from IECR,
-4.	Then we will enable GuarDuty and launch an “On-demand Malware scanning” on our EC2 Instance, and
-5.	Finally analyze a sample finding.
+1.	Start with an <b>overview of GuardDuty</b> and some of its <b>features</b>,
+2.	Dive into the practical section and <b>lunch an EC2 Instance</b> with an <b>EBS volume</b> attached to it,
+3.	Then connect to the EC2 instance via <b>EC2 Instance Connect to download our sample infected file from EICAR</b>,
+4.	Then <b>enable GuarDuty and launch an “On-demand Malware scanning”</b> on our EC2 Instance, and
+5.	Finally analyze one finding using <b>Hybrid Analysis Cyber Threat Intelligence</b> platform.
 
 <h2>Overview Of Amazon GuardDuty</h2>
 
 <b>“Amazon GuardDuty is a threat detection service that continuously monitors your AWS accounts and workloads for malicious activity and delivers detailed security findings for visibility and remediation.”</b> - AWS Documentation
 
-GuardDuty uses Machine Learning algorithms to perform anomaly detection using 3rd party data. As we will see, you just need a few clicks to enable it and run a 30 days free trial. This means that you do not need to install any 3rd party software like TrendMicro’s Deep Security. You also do not need to do any configurations as GuardDuty comes fully configured by AWS to look for the malicious activities, although you can specify certain IP’s you wish to include/exempt from your scanning.
+GuardDuty uses Machine Learning algorithms to perform anomaly detection using 3rd party data. As we will see, you just need a few clicks to enable it and run a 30 days free trial. This means that you do not need to install any 3rd party software like <b><i>TrendMicro’s Deep Security</i></b>. You also do not need to do any configurations as GuardDuty comes fully configured by AWS to look for the malicious activities, although you can specify certain IP’s you wish to include/exempt from your scanning.
 
 <h3>Input Data</h3>
 
-You are probably wondering where does the data comes from? Well GuardDuty cab be set to receive log data from:-
+You are probably wondering "where does the log data comes from?" Well even though this is beyond the scope of our project, GuardDuty cab be set to receive logs from:-
 - <b>CloudTrail Events Logs</b> – such as unusual API calls, unauthorized deployment of services, etc.
 
   <b><i>CloudTrail Management Events</i></b> – such as VPC subnet creation, trail creation, etc.
   
-  <i><b>CloudTrail S3 Data Events</i></b> – get object, list objects, delete object, put object, etc.
+  <b><i>CloudTrail S3 Data Events</i></b> – get object, list objects, delete object, put object, etc.
 
 - <b>VPC Flow Logs</b> – unusual internal traffic, unusual IP addresses, etc
 - <b>DNS Logs</b> – compromised EC2 instances sending encoded data within DNS queries.
-- GuardDuty can also analyze EKS Audit Logs, RDS & Aurora, EBS, Lambda, S3 Data Events, etc to identify malicious activities. It can also be used to setup EventBridge rules to be notified in case of interesting findings.
+- GuardDuty can also analyze <b>EKS Audit Logs, RDS & Aurora, EBS, Lambda, S3 Data Events,</b> etc to identify malicious activities. It can also be used to <b>setup EventBridge rules</b> to be notified in case of interesting findings.
 - GuardDuty can help protect against <b>Cryptocurrency attacks</b> as it will generate a dedicated finding for such occasions when your resource is interacting with an <b>IP address</b> or a <b>Domain Name</b> that is know for Crypto related activities.
 
-Finally, it should be noted that <b>“Malware Protection”</b> is one out of a five GuardDuty features known as Protection Plans. The other four are <b>S3 Protection, EKS Protection, RDS Protection & Lambda Protection</b>.
+Finally, it should be noted that at the time of this publication <b>“Malware Protection for EC2”</b> is one out of a seven GuardDuty features known as Protection Plans. The other six are <b>S3 Protection, EKS Protection, Extended Threat Detection, Runtime Monitoring, Malware Protection for S3, RDS Protection, Lambda Protection</b>.
 
 <h2>EC2 Instance Launch</h2>
 
@@ -46,7 +46,7 @@ To launch the EC instance with the EBS volume attached to it we will:-
 2.	Click on <b>EC2</b> which is the first option on the list.  <img width="956" alt="1 - EC2 Launch" src="https://github.com/user-attachments/assets/6b0873a5-918b-420a-9682-bfd07266d875" />
 
 3.	Click on <b>“Instances”</b> on the left pane of the EC2 service page.
-4.	Click on either of the two <b>“Launch Instance”</b> buttons as circled on the screenshot below.  <img width="962" alt="2 - EC2 Launch" src="https://github.com/user-attachments/assets/470e079b-5d11-40b9-8fbe-67753c5c5ba0" />
+4.	Click on either of the two <b>“Launch Instances”</b> buttons as circled on the screenshot below.  <img width="962" alt="2 - EC2 Launch" src="https://github.com/user-attachments/assets/470e079b-5d11-40b9-8fbe-67753c5c5ba0" />
 
 5.	Type in the name you want for your EC2 Instance in the <b>“Name and Tag”</b> textbox.
 6.	Select the <b>OS Image type</b> you wish to use; <b>“Amazon Linux”</b> in our case.
@@ -59,11 +59,11 @@ To launch the EC instance with the EBS volume attached to it we will:-
 
 
 >[!IMPORTANT]
->I already have a key pair created, so I just chose it. However, you can choose to proceed without key pair or click on “create new key pair” to create yours.
-<b>#I will later make an illustration on “how to create new key pair” and will hopefully attach it here.#</b>
+>I already have a key pair created <b>"ec2-key"</b>, so I just chose it. However, you can choose to <b>Proceed without a key pair</b> or click on <b>create new key pair</b> to create yours.
+#I will later make an illustration on <b>how to create new key pair</b> and will hopefully attach it here.
 
 >[!WARNING]
->It is against AWS security Best Practice to launch an EC2 instance without an encryption key pair. Allow SSH traffic from anywhere. Doing so will allow anyone to have an unrestricted access to your EC2 instance.
+>It is against <b>AWS Security Best Practice</b> to launch an EC2 instance without an encryption key pair or <b>Allow SSH traffic from anywhere</b> because doing so will allow anyone to have an <b>unrestricted access</b> to your EC2 instance.
 
 10.	Then for the <b>Storage</b> leave everything as default, for we do not require huge storage for this practical and then click on <b>Launch Instance</b>.  <img width="959" alt="6 - EC2 Launch EBS" src="https://github.com/user-attachments/assets/a3fd21c4-4a2a-4eba-822d-8e4ab195a3ad" />
 
@@ -72,11 +72,11 @@ To launch the EC instance with the EBS volume attached to it we will:-
 
 12.	After completion, click on the <b>Instance ID i-01497d303bad2c421</b> in my case from the Success page displayed in order to start the instance. Also notice the <b>Launch log</b> showing that a <b>Security Group (AWS equivalent of endpoint Firewall)</b> has been configured for you based on the <b><i>allow SSH from 0.0.0.0/0</i></b> in <b>stage 9</b>.   <img width="962" alt="8 - EC2 Launch Success" src="https://github.com/user-attachments/assets/39b7c45d-6c3f-4652-b8f4-cdbfb3a7f806" />
 
-13.	<b>Voila!</b> Your EC2 Instance has been launched. Take note of the circled areas showing your EC2 configurations.
+13.	<b>Voila!</b> Your EC2 Instance has been launched. Take note of the circled areas showing your <b>EC2 configuration</b>.
 <img width="959" alt="9 - EC2 Launch Details" src="https://github.com/user-attachments/assets/b493d4d1-e916-40ff-b64d-93b2a220d1fc" />
 
 
-<h2>Connecting to EC2 to Download</h2>
+<h2>Connecting to EC2 to Download Malware Sample EICAR</h2>
 
 At this stage we will connect to the EC2 and download a sample malware from the internet. This will be the test material that GuardDuty will analyze and discover the malicious artifacts after we launched our scan. Below are the steps to follow:-
 
@@ -92,14 +92,13 @@ At this stage we will connect to the EC2 and download a sample malware from the 
 
 <h2>Perform Malware Scanning with Amazon GuardDuty</h2>
 
-
 At this stage we have already launched our EC2 instance and have also downloaded the malware sample on to the machine. Now what is left is to enable GuardDuty and start our scanning. It is worth mentioning at this stage that Amazon offers 2 types of malware scannings, <b>GuardDuty-Initiated malware scan</b> and <b>On-demand malware scan</b>. The former is automatic i.e GuardDuty starts the scanning once a certain <b><i>finding with potential presence of malware is discovered on an EC2 instance or a container</i></b>. However, the later can be initiated at anytime following the outlined steps below:-
 
 1.	Open a new <b>AWS Management Console</b> window, search for and open <b>GuardDuty</b> just as we did to launch EC2 at the beginning and click on <b>Get Started</b>.  <img width="959" alt="14 - Enable GuardDuty" src="https://github.com/user-attachments/assets/7911695d-98c2-4851-b3ab-fc5f41a8fcb9" />
 
 2.	Then scroll down and click on <b>Enable GuardDuty</b>.  <img width="959" alt="15 - Enable GuardDuty" src="https://github.com/user-attachments/assets/37ec11b1-ea89-4398-acc0-c0b290ffdd4e" />
 
-3.	From the left pane of GuardDuty service page click on <b>EC2 Malware Scanning</b>. Notice the <b>Summary dashboard</b> with the interesting things circled.  <img width="976" alt="16 - GuardDuty EC scan" src="https://github.com/user-attachments/assets/6e326d35-3eb9-4e5a-8925-b08460f95306" />
+3.	From the left pane of GuardDuty service page click on <b>EC2 Malware Scans</b>. Notice the <b>Summary dashboard</b> with the interesting things circled.  <img width="976" alt="16 - GuardDuty EC scan" src="https://github.com/user-attachments/assets/6e326d35-3eb9-4e5a-8925-b08460f95306" />
 
 4.	Click on either of the two <b>Start a new on-demand scan</b> buttons.  <img width="959" alt="17 - GuardDuty EC scan" src="https://github.com/user-attachments/assets/db27af57-4ca7-4fc2-ae3c-d2cf879c9855" />
 
@@ -110,12 +109,16 @@ At this stage we have already launched our EC2 instance and have also downloaded
 
 
 >[!NOTE]
->Usually GuardDuty will be configured with EventBridge to either trigger a Lambda Function to perform some remdiation or send SNS notifications to Security Analysts.
+>Usually GuardDuty will be configured with <b>EventBridge</b> to either <b>trigger a Lambda Function</b> to perform some action or <b>send SNS notifications</b> to Security Analysts.
 
-<h2>Finding Analysis</h2>
+<h2>Analysis of Findings with Hybrid Analysis CTI</h2>
 
 1.	Click on <b>Findings</b> to see the results of the scan. 
-2.	Click on one of the findings and analyze the <b>Severity level, Resources affected, Threats Detected,</b> etc
-3.	Copy the <b>hash</b> and got to <b>Hybrid Analysis</b> https://hybrid-analysis.com/ (or any other CTI platform like <b>VirusTotal</b>) and analyze the results of the file hash.
-4.	Finally go ahead and Disable the GuardDuty service by clicking on <b>Settings</b> and then <b>Disable</b> button.
+2.	Click on one of the findings and analyze the <b>Severity level, Resources affected, Threats Detected,</b> etc.   <img width="959" alt="20 - GuardDuty Findings Analysis" src="https://github.com/user-attachments/assets/154301c4-2b85-4dac-8b3e-cd633c9bc421" />
+ 
+3.	Copy the <b>hash</b> and got to <b>Hybrid Analysis</b> https://hybrid-analysis.com/ (or any other CTI platform like <b>VirusTotal</b>) and analyze the results of the file hash.  <img width="959" alt="21 - Hybrid Analysis" src="https://github.com/user-attachments/assets/3d9e2c52-7f41-48ed-a256-1f2ab237cca0" />
 
+4.	Finally go ahead and Disable the GuardDuty service by clicking on <b>Settings</b> and then <b>Disable</b> button.  
+<img width="959" alt="22 - Disable GuardDuty" src="https://github.com/user-attachments/assets/d3cd1f40-07a3-4b59-a7bf-812f61702fe9" />
+
+THANKS FOR SEEING THIS THROUGH :blush:
