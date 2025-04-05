@@ -2,7 +2,13 @@
 
 <h2>Project Scope</h2>
 This projects assumes that the reader is not an absolute beginner. That is the reader is already familiar with AWS terminologies and has access to AWS Management Console.
+
+
+> [!NOTE]
+> Make sure you terminate all services at the end of the practical to avoid incurring unnecessary cost at the end of the month.
+
 In this project we will:-
+
 
 1.	Start with an overview of GuardDuty and its features,
 2.	Dive into the practical section and lunch an EC2 Instance with an EBS volume attached to it,
@@ -28,7 +34,7 @@ You are probably wondering where does the data comes from? Well GuardDuty cab be
 - <b>VPC Flow Logs</b> – unusual internal traffic, unusual IP addresses, etc
 - DNS Logs – compromised EC2 instances sending encoded data within DNS queries.
 - GuardDuty can also analyze EKS Audit Logs, RDS & Aurora, EBS, Lambda, S3 Data Events, etc to identify malicious activities. It can also be used to setup EventBridge rules to be notified in case of interesting findings.
-- GuardDuty can help protect against Cryptocurrency attacks as it will generate a dedicated finding for such occasions when your resource is interacting with a IP or Domain Name that is know for Crypto mining activities.
+- GuardDuty can help protect against <b>Cryptocurrency attacks</b> as it will generate a dedicated finding for such occasions when your resource is interacting with an <b>IP address</b> or a <b>Domain Name</b> that is know for Crypto related activities.
 
 Finally, it should be noted that <b>“Malware Protection”</b> is one out of a five GuardDuty features known as Protection Plans. The other four are <b>S3 Protection, EKS Protection, RDS Protection & Lambda Protection</b>.
 
@@ -46,8 +52,8 @@ To launch the EC instance with the EBS volume attached to it we will:-
 6.	Select the <b>OS Image type</b> you wish to use; <b>“Amazon Linux”</b> in our case.
 7.	Expand the listbox and choose any of the free tier Amazon Machine Image; <b>Amazon Linux 2023 AMI</b> in our case.  <img width="959" alt="3 - EC2 Launch OS Spec" src="https://github.com/user-attachments/assets/e5a6e7bf-2866-480a-8c7e-addda2421f77" />
 
-8.	Leave Architecture as it is 64-bit (x86) and Instance Type as t2.micro
-9.	At this point we choose the key pair that will be used to access the EC2 and “Allow SSH from traffic from Anywhere 0.0.0.0/0”.Now there are 2 very important things to note here.
+8.	Leave <b>Architecture</b> as is <b>64-bit (x86)</b> and <b>Instance Type</b> as <b>t2.micro</b>
+9.	At this point we choose the <b>key pair</b> that will be used to access the EC2 and <b>“Allow SSH traffic from Anywhere 0.0.0.0/0”</b>.Now there are 2 very important things to note here.
 
 >[!IMPORTANT]
 >I already have a key pair created, so I just chose it. However, you can choose to proceed without key pair or click on “create new key pair” to create yours.
@@ -55,9 +61,10 @@ To launch the EC instance with the EBS volume attached to it we will:-
 
 >[!WARNING]
 >It is against AWS security Best Practice to launch an EC2 instance without an encryption key pair. Allow SSH traffic from anywhere. Doing so will allow anyone to have an unrestricted access to your EC2 instance.
-10.	Then for the Storage leave everything as default, for we do not require huge storage for this practical and then click on Launch Instance.
-11.	Allow the progress to complete, and in case any of the steps failed you can restart failed steps.
-12.	After completion, click on the Instance ID i-01497d303bad2c421 in my case from the Success page displayed. Also notice the Launch log showing that a Security Group (AWS equivalent of endpoint Firewall) has been configured for you based on the allow SSH from 0.0.0.0/0 in stage 9.
+
+10.	Then for the <b>Storage</b> leave everything as default, for we do not require huge storage for this practical and then click on Launch Instance.
+11.	Allow the process to complete, and in case any of the steps failed you can <b><i>restart failed</i></b> steps.
+12.	After completion, click on the <b>Instance ID i-01497d303bad2c421</b> in my case from the Success page displayed. Also notice the Launch log showing that a Security Group (AWS equivalent of endpoint Firewall) has been configured for you based on the allow SSH from 0.0.0.0/0 in stage 9.
 13.	Voila! Your EC2 Instance has been launched. Take note of the circled areas showing our configurations
 Connecting to EC2 to Download
 At this stage we will connect to the EC2 and download a sample malware from the internet. This will be the test material that GuardDuty will analyze and discover the malicious artifacts after we launched our scan. Below are the steps to follow:-
